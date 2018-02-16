@@ -1,0 +1,331 @@
+
+======================================================
+UDB 0
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\FreqDiv_1:not_last_reset\
+			Clock_150Hz
+			\FreqDiv_1:count_1\
+			\FreqDiv_1:count_2\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			Clock_150Hz
+			\FreqDiv_1:count_0\
+			\FreqDiv_1:count_1\
+			\FreqDiv_1:count_2\
+			\FreqDiv_1:count_3\
+			\FreqDiv_1:count_4\
+			\FreqDiv_1:not_last_reset\
+
+		 Output nets:
+			Clock_150Hz
+			\FreqDiv_1:count_1\
+			\FreqDiv_1:count_2\
+			\FreqDiv_1:not_last_reset\
+
+		 Product terms:
+			!Clock_150Hz * !\FreqDiv_1:count_1\ * \FreqDiv_1:count_0\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:count_4\
+			!Clock_150Hz * !\FreqDiv_1:not_last_reset\
+			!\FreqDiv_1:count_0\
+			!\FreqDiv_1:count_0\ * !\FreqDiv_1:count_4\ * Clock_150Hz * \FreqDiv_1:count_1\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:not_last_reset\
+			!\FreqDiv_1:count_1\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:count_4\
+			!\FreqDiv_1:not_last_reset\
+			\FreqDiv_1:count_0\ * \FreqDiv_1:count_1\ * \FreqDiv_1:not_last_reset\
+			\FreqDiv_1:count_0\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:count_4\ * \FreqDiv_1:not_last_reset\
+
+	PLD 1:
+		 Instances:
+			\FreqDiv_1:count_4\
+			\FreqDiv_1:count_3\
+			\FreqDiv_1:count_0\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\FreqDiv_1:count_0\
+			\FreqDiv_1:count_1\
+			\FreqDiv_1:count_2\
+			\FreqDiv_1:count_3\
+			\FreqDiv_1:count_4\
+			\FreqDiv_1:not_last_reset\
+
+		 Output nets:
+			\FreqDiv_1:count_0\
+			\FreqDiv_1:count_3\
+			\FreqDiv_1:count_4\
+
+		 Product terms:
+			\FreqDiv_1:count_0\ * \FreqDiv_1:count_1\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:not_last_reset\
+			\FreqDiv_1:count_0\ * \FreqDiv_1:count_1\ * \FreqDiv_1:count_2\ * \FreqDiv_1:not_last_reset\
+			\FreqDiv_1:count_0\ * \FreqDiv_1:count_2\ * \FreqDiv_1:count_3\ * \FreqDiv_1:count_4\ * \FreqDiv_1:not_last_reset\
+			\FreqDiv_1:not_last_reset\
+
+	Datapath:
+
+	Control, status and sync:
+
+	Local clock and reset nets:
+
+======================================================
+UDB 1
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			\Timer_from_master:TimerUDB:status_tc\
+			Net_430
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			\Timer_from_master:TimerUDB:control_7\
+			\Timer_from_master:TimerUDB:per_zero\
+
+		 Output nets:
+			Net_430
+			\Timer_from_master:TimerUDB:status_tc\
+
+		 Product terms:
+			\Timer_from_master:TimerUDB:control_7\ * \Timer_from_master:TimerUDB:per_zero\
+
+	PLD 1:
+		 Instances:
+			Ch_7
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_1\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			Net_264
+			Net_358
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_1\
+
+		 Output nets:
+			Ch_7
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_1\
+
+		 Product terms:
+			!\DebouncerCh7:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh7:DEBOUNCER[0]:d_sync_1\
+			Net_264
+			Net_358
+			\DebouncerCh7:DEBOUNCER[0]:d_sync_0\
+
+	Datapath:
+		 Instances:
+			\Timer_from_master:TimerUDB:sT8:timerdp:u0\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_HFClk
+			\Timer_from_master:TimerUDB:control_7\
+			\Timer_from_master:TimerUDB:per_zero\
+
+		 Output nets:
+			\Timer_from_master:TimerUDB:per_zero\
+			\Timer_from_master:TimerUDB:status_2\
+			\Timer_from_master:TimerUDB:status_3\
+
+	Control, status and sync:
+		 Instances:
+			\Timer_from_master:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : controlcell
+			\Timer_from_master:TimerUDB:rstSts:stsreg\ : statusicell
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: 
+
+		 Input nets:
+			ClockBlock_HFClk
+			\Timer_from_master:TimerUDB:status_2\
+			\Timer_from_master:TimerUDB:status_3\
+			\Timer_from_master:TimerUDB:status_tc\
+
+		 Output nets:
+			\Timer_from_master:TimerUDB:control_7\
+
+	Local clock and reset nets:
+			Clock_150Hz
+
+======================================================
+UDB 2
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			Ch_4
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_1\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			Net_278
+			Net_316
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_1\
+
+		 Output nets:
+			Ch_4
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_1\
+
+		 Product terms:
+			!\DebouncerCh4:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh4:DEBOUNCER[0]:d_sync_1\
+			Net_278
+			Net_316
+			\DebouncerCh4:DEBOUNCER[0]:d_sync_0\
+
+	PLD 1:
+		 Instances:
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_0\
+			Ch_2
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_1\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			Net_302
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_0\
+
+		 Output nets:
+			Ch_2
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_1\
+
+		 Product terms:
+			!\DebouncerCh2:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh2:DEBOUNCER[0]:d_sync_1\
+			Net_302
+			\DebouncerCh2:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_0\
+
+	Datapath:
+
+	Control, status and sync:
+
+	Local clock and reset nets:
+			Clock_150Hz
+
+======================================================
+UDB 3
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			Ch_6
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_1\
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			Net_330
+			Net_344
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_1\
+
+		 Output nets:
+			Ch_6
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_1\
+
+		 Product terms:
+			!\DebouncerCh6:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh6:DEBOUNCER[0]:d_sync_1\
+			Net_330
+			Net_344
+			\DebouncerCh6:DEBOUNCER[0]:d_sync_0\
+
+	PLD 1:
+		 Instances:
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_1\
+			Ch_1
+			Ch_5
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_1\
+
+		 Output nets:
+			Ch_1
+			Ch_5
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_1\
+
+		 Product terms:
+			!\DebouncerCh1:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh1:DEBOUNCER[0]:d_sync_1\
+			!\DebouncerCh5:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh5:DEBOUNCER[0]:d_sync_1\
+			\DebouncerCh1:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh5:DEBOUNCER[0]:d_sync_0\
+
+	Datapath:
+
+	Control, status and sync:
+
+	Local clock and reset nets:
+			Clock_150Hz
+
+======================================================
+UDB 4
+------------------------------------------------------
+	PLD 0:
+		 Instances:
+			Ch_3
+
+		 Clock net: Clock_3kHz_digital
+		 Set/Reset net: 
+		 Enable net: Clock_150Hz
+
+		 Input nets:
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_0\
+			\DebouncerCh3:DEBOUNCER[0]:d_sync_1\
+
+		 Output nets:
+			Ch_3
+
+		 Product terms:
+			!\DebouncerCh3:DEBOUNCER[0]:d_sync_0\ * \DebouncerCh3:DEBOUNCER[0]:d_sync_1\
+
+	PLD 1:
+
+	Datapath:
+
+	Control, status and sync:
+
+	Local clock and reset nets:
+			Clock_150Hz

@@ -1,0 +1,7 @@
+F:\Google\Cypress\WaterMeasurement\Converter_PC_RS_485\Converter_PC_RS_485.cydsn\Converter_PC_RS_485.cyprj|4bea3a87-c64b-4c6e-89e1-7c712c7d4970
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|01cb53a0-2059-4b33-bab5-fb89250db86a
+C:\Users\JurgenPC\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|d698ee27-90cd-45c2-9ed2-1b3934b5fafe
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|6c799e96-bcc0-4705-98a9-0c345b8022ee
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|969b665b-dc51-475a-9fa8-2a09aa0a40c3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|38aef7b5-c9a4-4a16-9636-cf034f0e022c
+F:\Google\Cypress\WaterMeasurement\Converter_PC_RS_485\Counter_test.cydsn\Counter_test.cyprj|1c3db223-8379-40f6-bb62-411f91bacaec

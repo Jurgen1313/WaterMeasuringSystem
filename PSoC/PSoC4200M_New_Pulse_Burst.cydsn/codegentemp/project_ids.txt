@@ -1,0 +1,6 @@
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC4200M_New_Pulse_Burst.cydsn\PSoC4200M_New_Pulse_Burst.cyprj|16a22a00-9e44-4871-988a-7a6bd5dad9fd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|2acf4ad0-1dbc-4b69-8d5c-2bce10e84bee
+C:\Users\JurgenPC\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|b0373503-6a0d-4673-a9b2-52eabd106a50
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|1fbbfe84-b19f-4aeb-9bec-ca6023ed3f2d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e97793ab-eada-4811-ace7-8fc19ffbe247
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|c7d0d3ed-fba3-4a56-bff0-e15e3281c46a

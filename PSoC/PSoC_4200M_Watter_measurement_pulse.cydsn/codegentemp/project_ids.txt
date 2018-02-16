@@ -1,0 +1,10 @@
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC4200M_Emulator_Pulse.cydsn\PSoC4200M_Emulator_Pulse.cyprj|6ac07be2-a871-4803-ad2d-09c7585d405e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|f54b4bd1-4717-4044-bd7b-80bc5431fd30
+C:\Users\JurgenPC\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|ae9a9bea-e5dd-4fd5-863c-7187f8c4fc5b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f9987596-ebcc-4d01-af41-9f25f90d0d8b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|7c02f2b9-952b-4230-9d66-4f60137ee99d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|4ba3e7fa-79d0-459b-be83-4ca605efd694
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC4200M_Emulator_Relay.cydsn\PSoC4200M_Emulator_Relay.cyprj|33bf86d3-06f1-4f6f-84ee-fd6e10229180
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC_4200M_Watter_measurement_relay.cydsn\PSoC_4200M_Watter_measurement_relay.cyprj|93bee47c-3af6-4f03-bdf1-8eb32af4aafa
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC_4200M_Watter_measurement_pulse.cydsn\PSoC_4200M_Watter_measurement_pulse.cyprj|6420ec90-57be-41eb-b6c1-8229bd43657e
+F:\Google\Cypress\WaterMeasurement\EmulRelay\psoc\PSoC4200M_New_Pulse_Burst.cydsn\PSoC4200M_New_Pulse_Burst.cyprj|8da94770-e333-4c20-bb63-35be2f24a149

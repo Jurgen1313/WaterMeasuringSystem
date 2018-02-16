@@ -1,0 +1,32 @@
+set_location_hint "Clock_150Hz" 0 1 0 0
+set_location_hint "\FreqDiv_1:count_1\" 0 1 0 1
+set_location_hint "\FreqDiv_1:count_2\" 0 1 0 2
+set_location_hint "\FreqDiv_1:not_last_reset\" 0 1 0 3
+set_location_hint "\FreqDiv_1:count_3\" 0 1 1 0
+set_location_hint "\FreqDiv_1:count_4\" 0 1 1 1
+set_location_hint "\FreqDiv_1:count_0\" 0 1 1 2
+set_location_hint "Net_430" 1 1 0 0
+set_location_hint "\Timer_from_master:TimerUDB:status_tc\" 1 1 0 1
+set_location_hint "Ch_3" 1 1 1 0
+set_location_hint "\DebouncerCh3:DEBOUNCER[0]:d_sync_1\" 1 1 1 1
+set_location_hint "\DebouncerCh3:DEBOUNCER[0]:d_sync_0\" 1 1 1 2
+set_location_hint "\DebouncerCh1:DEBOUNCER[0]:d_sync_0\" 1 1 1 3
+set_location_hint "\Timer_from_master:TimerUDB:sT8:timerdp:u0\" 1 1 2 
+set_location_hint "\Timer_from_master:TimerUDB:rstSts:stsreg\" 1 1 4 
+set_location_hint "\Timer_from_master:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 1 1 6
+set_location_hint "Ch_5" 1 0 0 0
+set_location_hint "\DebouncerCh5:DEBOUNCER[0]:d_sync_1\" 1 0 0 1
+set_location_hint "\DebouncerCh5:DEBOUNCER[0]:d_sync_0\" 1 0 0 2
+set_location_hint "\DebouncerCh2:DEBOUNCER[0]:d_sync_0\" 1 0 0 3
+set_location_hint "\DebouncerCh2:DEBOUNCER[0]:d_sync_1\" 1 0 1 0
+set_location_hint "Ch_2" 1 0 1 1
+set_location_hint "\DebouncerCh4:DEBOUNCER[0]:d_sync_0\" 1 0 1 2
+set_location_hint "\DebouncerCh4:DEBOUNCER[0]:d_sync_1\" 1 0 1 3
+set_location_hint "Ch_1" 0 0 0 0
+set_location_hint "\DebouncerCh1:DEBOUNCER[0]:d_sync_1\" 0 0 0 1
+set_location_hint "\DebouncerCh6:DEBOUNCER[0]:d_sync_0\" 0 0 0 2
+set_location_hint "\DebouncerCh6:DEBOUNCER[0]:d_sync_1\" 0 0 0 3
+set_location_hint "Ch_6" 0 0 1 0
+set_location_hint "\DebouncerCh7:DEBOUNCER[0]:d_sync_0\" 0 0 1 1
+set_location_hint "\DebouncerCh7:DEBOUNCER[0]:d_sync_1\" 0 0 1 2
+set_location_hint "Ch_7" 0 0 1 3
