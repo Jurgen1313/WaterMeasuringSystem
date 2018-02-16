@@ -1,0 +1,277 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:local="clr-namespace:WatterMeasurement.Model"
+        xmlns:converter="clr-namespace:WatterMeasurement.ViewModel.Converters"    
+        xmlns:ViewModel="clr-namespace:WatterMeasurement.ViewModel"         
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        x:Class="WatterMeasurement.View.MainWindow"
+        mc:Ignorable="d"
+        Title="WatterMeasurementSystem" Height="530" Width="700">
+
+    <Window.Resources>
+        <converter:DeviceTypeConverter x:Key="Converters"/>
+        <converter:CombineTwoValues x:Key="CombineValues"/>
+        <ViewModel:ViewModelCommands x:Key="Commands"/>
+    </Window.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <Menu Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Measurement" ></MenuItem>
+                <!--<MenuItem Header="Save measurements" >
+                    <MenuItem Header="*.pdf"></MenuItem>
+                    <MenuItem Header="*.xml"></MenuItem>
+                </MenuItem>-->
+                <MenuItem Header="Reset" Command="{Binding ResetMeasuremet,Source={StaticResource Commands}}"
+                          CommandParameter="{Binding measurementsResults}"/>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ProgramExit, Source={StaticResource Commands}}"
+                          CommandParameter="{Binding SelectedDevice}"/>
+            </MenuItem>
+            <!--<MenuItem Header="Edit" ></MenuItem>-->
+            <MenuItem Header="About" ></MenuItem>
+        </Menu>
+    <Grid>        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.37*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="5,5,5,5">
+            <GroupBox Header="Select device">
+                <ComboBox x:Name="AvailableDevices" Margin="5,5,5,5"  ItemsSource="{Binding countersSystem.device}"
+                          SelectedItem="{Binding SelectedDevice}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.15*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <StackPanel Grid.Column="0" Margin="5">
+                                        <!--<TextBlock Text="Device Number: "/>-->
+                                        <TextBlock Text="{Binding DeviceNumber}" FontWeight="Bold" VerticalAlignment="Center" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Device address: "/>
+                                            <TextBlock Text="{Binding DeviceAddress}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Device type: "/>
+                                            <TextBlock Text="{Binding DeviceType, Converter={StaticResource Converters}}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </GroupBox>
+            <GroupBox Header="Select counter">
+                <ListBox  x:Name="Counters" Margin="5,5,5,5" ItemsSource="{Binding SelectedDevice.counter}" 
+                          SelectedItem="{Binding SelectedCounter}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding CounterNumber}" FontWeight="Bold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Foreground" Value="Red" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Active}" Value="True">
+                                                    <Setter Property="Foreground" Value="Green" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                    <InlineUIContainer>
+                                        <TextBlock Text="Counter" FontWeight="Regular" Margin="5,0,0,0" />
+                                    </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                                        <TextBlock Text="Type:" Margin="5,0,0,0"/>
+                                    </InlineUIContainer><Run Text=" "/><InlineUIContainer>
+                                        <TextBlock Text="{Binding CounterType, Converter={StaticResource Converters}}"/>
+                                    </InlineUIContainer></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+            <GroupBox Header="Examplary Counter" Margin="0">
+                <StackPanel Margin="5,5,5,5">
+                    <TextBlock Text="Pulses/Liter" Margin="5"/>
+                    <TextBox Text="{Binding countersSystem.ExamplaryCounterPulsesPerLiter}"/>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Current measurement: " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Path=CurrentMeasurementNumber}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button Content="START" Margin="5,5,5,5" Command="{Binding StartMeasurements, Source={StaticResource Commands}}" CommandParameter="{Binding}">
+                <!--<Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource CombineValues}">
+                        <Binding Path="countersSystem"/>
+                        <Binding Path="measurementsResults"/>
+                        <Binding Path="."/> 
+                    </MultiBinding>
+                </Button.CommandParameter>-->                
+            </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <GroupBox Margin="5">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox x:Name="ActiveCounter" IsChecked="{Binding SelectedCounter.Active}" 
+                              Command="{Binding ActivateDeactivateCountersInDevice, Source={StaticResource Commands}}"
+                              CommandParameter="{Binding SelectedDevice}" Margin="5,6,0,5">
+                        </CheckBox>
+                        <TextBlock Text="Counter" Margin="5"/>
+                        <TextBlock Text="{Binding SelectedCounter.CounterNumber}" Margin="0,5,5,5"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel Margin="5" IsEnabled="{Binding ElementName=ActiveCounter, Path=IsChecked}">
+                    <TextBlock Text="Set Counter Measurement Value (in L)"/>
+                    <TextBox Text="{Binding SetValueLiters}"/>
+                    <!--<TextBox Text="{Binding SelectedCounter.SetCounterValue}"/>-->
+                    <!--<TextBox>
+                        <TextBox.Text>
+                            <Binding
+                        </TextBox.Text>
+                    </TextBox>-->
+                    <TextBlock Text="Pulse/Liter"/>
+                    <TextBox Text="{Binding SelectedCounter.CounterPulsesPerLiter}"/>
+                    <GroupBox Header="Counter data" Padding="5">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel>
+                                <TextBlock Text="Owner"/>
+                                <TextBox Text="{Binding SelectedCounter.Owner}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Model"/>
+                                <TextBox Text="{Binding SelectedCounter.CounterModel}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Serial Number"/>
+                                <TextBox Text="{Binding SelectedCounter.CounterSerialNumber}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+
+            <!--<GroupBox Header="Results Of Measurements" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <TextBlock Text="1" Margin="5"/>
+                        <TextBlock Text="2" Margin="5"/>
+                        <TextBlock Text="3" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"  Orientation="Vertical">
+                        --><!--<TextBox Text="{Binding SelectedCounter.Liters}" Margin="5" IsReadOnly="True" IsEnabled="True"/>--><!--
+                        <TextBlock Text="{Binding SelectedCounter.Liters}" Margin="5"/>
+                        <TextBox Text="2SetCounterL" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                        <TextBox Text="3SetCounterL" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"  Orientation="Vertical">
+                        --><!--<TextBox Text="{Binding SelectedCounter.Liters}" Margin="5" IsReadOnly="True" IsEnabled="True"/>--><!--
+                        <TextBlock Text="{Binding SelectedCounter.Liters}" Margin="5"/>
+                        <TextBox Text="2SetCounterL" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                        <TextBox Text="3SetCounterL" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3"  Orientation="Vertical">
+                        --><!--<TextBox Text="{Binding SelectedCounter.CurrentCounterValue}" Margin="5" IsReadOnly="True" IsEnabled="True"/>--><!--
+                        <TextBlock Text="{Binding SelectedCounter.CurrentCounterValue}" Margin="5"/>
+                        <TextBox Text="2CounterVal" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                        <TextBox Text="3CounterVal" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="4"  Orientation="Vertical">
+                        --><!--<TextBox Text="{Binding SelectedCounter.CurrentExamplaryCounterValue}" Margin="5" IsReadOnly="True" IsEnabled="True"/>--><!--
+                        <TextBlock Text="{Binding SelectedCounter.CurrentExamplaryCounterValue}" Margin="5"/>
+                        <TextBox Text="2ExamplaryVal" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                        <TextBox Text="3ExamplaryVal" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="5"  Orientation="Vertical">
+                        --><!--<TextBox Text="1Error" Margin="5" IsReadOnly="True" IsEnabled="True"/>--><!--
+                        <TextBlock Text="1Error" Margin="5"/>
+                        <TextBox Text="2Error" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                        <TextBox Text="3Error" Margin="5" IsReadOnly="True" IsEnabled="True"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>-->
+            
+            <!--<GroupBox Header="Measurements">
+                <ListBox  x:Name="Measurements" ItemsSource="{Binding SelectedMeasurement.counterMeasurementsResults}" Margin="5">
+                    --><!--<ListBoxItem>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Number" Margin="5,5,5,5"/>
+                            <TextBlock Text="SetValue" Margin="5,5,5,5"/>
+                            <TextBlock Text="CurrValu" Margin="5,5,5,5"/>
+                            <TextBlock Text="ExamplaVal" Margin="5,5,5,5"/>
+                        </StackPanel>
+                    </ListBoxItem>--><!--
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=MeasurementNumber}"/>
+                                --><!--<TextBlock Text="{Binding Path=}"/>--><!--
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    --><!--<ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <TextBox Text="test"/>
+                            -->
+                    <!--<TextBlock Text="Number" Margin="5,5,5,0"/>
+                            <TextBlock Text="SetValue" Margin="5,5,5,0"/>
+                            <TextBlock Text="CurrentValue" Margin="5,5,5,0"/>
+                            <TextBlock Text="ExamplaryValue" Margin="5,5,5,0"/>
+                            <TextBlock Text="Error" Margin="5,5,5,0"/>-->
+                    <!--                            
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>--><!--
+                </ListBox>
+            </GroupBox>-->
+            
+            <GroupBox Header="Measurements Results" Margin="5">
+                <DataGrid x:Name="measurement" AutoGenerateColumns="False" ItemsSource="{Binding SelectedMeasurement.counterMeasurementsResults}" IsReadOnly="True" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Number" Binding="{Binding Path=MeasurementNumber}" Width="*"/>
+                        <DataGridTextColumn Header="SetVal (L)" Binding="{Binding Path=SetCounterValue}" Width="*"/>
+                        <DataGridTextColumn Header="CurrentVal (L)" Binding="{Binding Path=MeasuredCounterValue}" Width="*"/>
+                        <DataGridTextColumn Header="ExamplaryVal (L)" Binding="{Binding Path=MeasuredExamplaryCounterValue}" Width="*"/>
+                        <DataGridTextColumn Header="Error (L)" Binding="{Binding Path=ErrorValue}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <!--<TextBox Text="{Binding }"-->
+
+            <GroupBox Header="Just for testing">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Measurement number"/>
+                    <TextBox Text="{Binding Path=CurrentMeasurementNumber}"/>
+                    <Button Content="ReadValue" Margin="5,5,5,5" Command="{Binding ReadCounterMeasuredValues, Source={StaticResource Commands}}" 
+                    CommandParameter="{Binding SelectedCounter}"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+
+    </StackPanel>
+</Window>
+
