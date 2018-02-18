@@ -9,7 +9,8 @@
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         x:Class="WatterMeasurement.View.MainWindow"
         mc:Ignorable="d"
-        Title="WatterMeasurementSystem" Height="530" Width="700">
+        Title="WatterMeasurementSystem" Height="530" Width="700"
+    d:DataContext="{d:DesignInstance d:Type=ViewModel:MainViewModel}">
 
     <Window.Resources>
         <converter:DeviceTypeConverter x:Key="Converters"/>
@@ -25,6 +26,8 @@
                     <MenuItem Header="*.pdf"></MenuItem>
                     <MenuItem Header="*.xml"></MenuItem>
                 </MenuItem>-->
+                <MenuItem Header="Find Devices" Command="{Binding FindDevices, Source={StaticResource Commands}}"
+                          CommandParameter="{Binding}"/>
                 <MenuItem Header="Reset" Command="{Binding ResetMeasuremet,Source={StaticResource Commands}}"
                           CommandParameter="{Binding measurementsResults}"/>
                 <Separator />
@@ -42,9 +45,10 @@
 
         <StackPanel Grid.Column="0" Margin="5,5,5,5">
             <GroupBox Header="Select device">
-                <ComboBox x:Name="AvailableDevices" Margin="5,5,5,5"  ItemsSource="{Binding countersSystem.device}"
+                    <ComboBox x:Name="AvailableDevices" Margin="5,5,5,5" ItemsSource="{Binding countersSystem.device, NotifyOnSourceUpdated=True}"
                           SelectedItem="{Binding SelectedDevice}">
-                    <ComboBox.ItemTemplate>
+                <!--<ComboBox x:Name="AvailableDevices" Margin="5,5,5,5" DataContext="{Binding countersSystem.device}" ItemsSource="{Binding Mode=OneWay}" SelectedIndex="{Binding /}" IsSynchronizedWithCurrentItem="{Binding Mode=OneWay}" >-->
+                        <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel >
                                 <Grid>
@@ -137,7 +141,7 @@
                 </GroupBox.Header>
                 <StackPanel Margin="5" IsEnabled="{Binding ElementName=ActiveCounter, Path=IsChecked}">
                     <TextBlock Text="Set Counter Measurement Value (in L)"/>
-                    <TextBox Text="{Binding SetValueLiters}"/>
+                    <TextBox Text="{Binding SetValueLiters, Mode=TwoWay}"/>
                     <!--<TextBox Text="{Binding SelectedCounter.SetCounterValue}"/>-->
                     <!--<TextBox>
                         <TextBox.Text>
@@ -249,7 +253,7 @@
             </GroupBox>-->
             
             <GroupBox Header="Measurements Results" Margin="5">
-                <DataGrid x:Name="measurement" AutoGenerateColumns="False" ItemsSource="{Binding SelectedMeasurement.counterMeasurementsResults}" IsReadOnly="True" Margin="5">
+                    <DataGrid x:Name="measurement" AutoGenerateColumns="False" ItemsSource="{Binding SelectedMeasurement.counterMeasurementsResults}" IsReadOnly="True" Margin="5">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Number" Binding="{Binding Path=MeasurementNumber}" Width="*"/>
                         <DataGridTextColumn Header="SetVal (L)" Binding="{Binding Path=SetCounterValue}" Width="*"/>

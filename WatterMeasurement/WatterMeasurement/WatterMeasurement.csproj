@@ -73,9 +73,11 @@
     <Compile Include="Services\ModBusCommand\CRC16Calculation.cs" />
     <Compile Include="Services\ModBusCommand\ModBusCommands.cs" />
     <Compile Include="Services\ModBusCommand\TransferData.cs" />
+    <Compile Include="ViewModel\Commands\BaseCOmmand.cs" />
     <Compile Include="ViewModel\Commands\ExitCommand.cs" />
     <Compile Include="ViewModel\Commands\FindAllDevices.cs" />
     <Compile Include="ViewModel\Commands\ActivateDeactivateCounters.cs" />
+    <Compile Include="ViewModel\Commands\FindDevices.cs" />
     <Compile Include="ViewModel\Commands\ReadCounterMeasuredValue.cs" />
     <Compile Include="ViewModel\Commands\ResetMeasurements.cs" />
     <Compile Include="ViewModel\Commands\SetValueToCounter.cs" />

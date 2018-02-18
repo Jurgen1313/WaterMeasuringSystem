@@ -13,7 +13,7 @@ namespace WatterMeasurement.Model
 {
     public class CounterSystem : INotifyPropertyChanged
     {
-        public ObservableCollection<SlaveDevice> device { get; private set; }
+        public ObservableCollection<SlaveDevice> device { get; set; }
         public bool foundSlaveDevice;
         public uint numberOfSlaveDevices { get; private set; }
         private UInt16 examplaryCounterPulsesPerLiter;
@@ -26,6 +26,7 @@ namespace WatterMeasurement.Model
                 OnPropertyChanged("ExamplaryCounterPulsesPerLiter");
             }
         }
+
         public CounterSystem(SerialPort serialPort, List<FoundSlaveDevice> AllSlaveDevices)
         {
             device = new ObservableCollection<SlaveDevice>();
@@ -33,10 +34,28 @@ namespace WatterMeasurement.Model
 
             foreach (var slaveDevice in AllSlaveDevices)
             {
-                device.Add(new SlaveDevice(serialPort, slaveDevice) );
+                device.Add(new SlaveDevice(serialPort, slaveDevice));
+                //SlaveDevice newSlave = new SlaveDevice(serialPort, slaveDevice);
+                //Device = newSlave;
+                //AddDevice(serialPort, slaveDevice);
                 numberOfSlaveDevices++;
-                OnPropertyChanged("addSlaveDevice");
+                //OnPropertyChanged("device.Add");
             }
+        }
+
+        //public ObservableCollection<SlaveDevice> Device {
+        //    get { return device; }
+        //    set
+        //    {
+        //        device.Add(value);
+        //        OnPropertyChanged("Device");
+        //    }
+        //}
+
+        public void AddDevice(SerialPort serialPort, FoundSlaveDevice slaveDevice)
+        {
+            device.Add(new SlaveDevice(serialPort, slaveDevice));
+            OnPropertyChanged(nameof(AddDevice));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

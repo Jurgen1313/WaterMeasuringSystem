@@ -79,7 +79,7 @@ namespace WatterMeasurement.Services.COM_Port
                     usedSerialPort.Close();
                     usedSerialPort.Open();
                 }
-
+                
                 packageToSlave = TransferData.MakePackage(converterAddress, (byte)ModbusCommand.FindMaster);
                 TransferData.SendPackage(usedSerialPort, packageToSlave);
                 if (TransferData.ReadAnswer(usedSerialPort, packageFromSlave))

@@ -78,8 +78,11 @@ namespace WatterMeasurement.Model
             set
             {
                 if (setCounterValue != value)
+                {
                     setCounterValue = value;
-                OnPropertyChanged("SetCounterValue");
+                    OnPropertyChanged("SetCounterValue");
+                }
+                
             }
         }
         public UInt32 CurrentCounterValue
@@ -174,9 +177,10 @@ namespace WatterMeasurement.Model
                 if (liters != value)
                 {
                     liters = value;
-                    //setCounterValue = (UInt32)(liters / counterPulsesPerLiter);
+                    SetCounterValue = (UInt32)(liters / counterPulsesPerLiter);
+
                 }
-                OnPropertyChanged("Liters");
+                OnPropertyChanged(nameof(Liters));
             }
         }
 

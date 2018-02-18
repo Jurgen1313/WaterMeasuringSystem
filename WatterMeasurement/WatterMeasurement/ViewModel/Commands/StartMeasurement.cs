@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Threading;
 using WatterMeasurement.Model;
 using WatterMeasurement.Services.Assets;
@@ -16,9 +15,8 @@ using WatterMeasurement.ViewModel.Converters;
 
 namespace WatterMeasurement.ViewModel.Commands
 {
-    public class StartMeasurement : ICommand
+    public class StartMeasurement : BaseCOmmand
     {
-        private ViewModelCommands deviceViewModel;
         private CounterSystem systemDevice;
         private SystemMeasurementsResults measurementsResults;
         private byte currentMeasurementNumber;
@@ -27,16 +25,10 @@ namespace WatterMeasurement.ViewModel.Commands
 
         public StartMeasurement(ViewModelCommands selectedDevice)
         {
-            this.deviceViewModel = selectedDevice;
         }
+       
 
-        public event EventHandler CanExecuteChanged;
-        //{
-        //    add { CommandManager.RequerySuggested += value; }
-        //    remove { CommandManager.RequerySuggested -= value; }
-        //}
-
-        public bool CanExecute(object parameter)
+        public override bool CanExecute(object parameter)
         {
             mainViewModel = parameter as MainViewModel;
 
@@ -45,40 +37,26 @@ namespace WatterMeasurement.ViewModel.Commands
                 this.systemDevice = mainViewModel.countersSystem;
                 this.measurementsResults = mainViewModel.measurementsResults;
                 this.currentMeasurementNumber = mainViewModel.CurrentMeasurementNumber;
-            }
-            //Debug.WriteLine("");
 
-            //if (systemDevice != null)
-            //    return true;
-            //else
-            //    return false;
-            ////object tmpParam = parameter;
-            ////if (tmpParam != null)
-            ////{
-            ////    var tmpSystemDevice = parameter as CounterSystem;
-            ////    if (tmpSystemDevice != null)
-            ////    {
-            ////        Debug.WriteLine("FNC true");
-            ////        foreach (var device in tmpSystemDevice.device)
-            ////        {
-            ////            foreach (var counter in device.counter)
-            ////            {
-            ////                if (counter.Active)
-            ////                {
-            ////                    return true;
-            ////                }
-            ////            }
-            ////        }
-            ////    }
-            ////    Debug.WriteLine("FNC false");
-            ////    //return false;
-            ////}
-            ////Debug.WriteLine("FNC false");
-            ////return false;
-            return true;
+                //Debug.WriteLine("FNC true");
+                if (systemDevice != null)
+                {
+                    foreach (var device in systemDevice.device)
+                    {
+                        foreach (var counter in device.counter)
+                        {
+                            if (counter.Active)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
-        public void Execute(object parameter)
+        public override void Execute(object parameter)
         {
             MainViewModel mainViewModel = parameter as MainViewModel;
             int[] numberOfActiveDevices;

@@ -17,17 +17,19 @@ namespace WatterMeasurement.ViewModel
         public ReadCounterMeasuredValue ReadCounterMeasuredValues { get; set; }
         public ExitCommand ProgramExit { get; set; }
         public ResetMeasurements ResetMeasuremet { get; set; }
+        public FindDevices FindDevices { get; set; }
         //public FindAllDevices FindDevices { get; set; }
 
         public ViewModelCommands()
         {
             //this.activateCounters = new ActivateCounter();
-            this.ActivateDeactivateCountersInDevice = new ActivateDeactivateCounters(this);
+            this.ActivateDeactivateCountersInDevice = new ActivateDeactivateCounters();
             this.SetValuesToCounter = new SetValueToCounter(this);
             this.StartMeasurements = new StartMeasurement(this);
             this.ReadCounterMeasuredValues = new ReadCounterMeasuredValue(this);
             this.ProgramExit = new ExitCommand();
             this.ResetMeasuremet = new ResetMeasurements();
+            this.FindDevices = new FindDevices(this);
             //this.FindDevices = new FindAllDevices(this);
         }
     }

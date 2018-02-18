@@ -21,7 +21,17 @@ namespace WatterMeasurement.ViewModel
     {
         private byte converterAddress { get; set; }
         private byte measurementNumber { get; set; }
-        public CounterSystem countersSystem { get; set; }
+
+        public CounterSystem countersSystem
+        {
+            get => _countersSystem;
+            set
+            {
+                _countersSystem = value; 
+                OnPropertyChanged(nameof(countersSystem));
+            }
+        }
+
         private bool foundDevice;
         public SystemMeasurementsResults measurementsResults { get; set; }
 
@@ -68,10 +78,12 @@ namespace WatterMeasurement.ViewModel
                 {
                     currentMeasurementResults = value;
                     OnPropertyChanged("CurrentMeasurementResults");
+                    OnPropertyChanged("SelectedCounter");
                 }
             }
         }
 
+        //SelectedMeasurementsResult
         private CounterMeasurementsResults selectedMeasurement;
         public CounterMeasurementsResults SelectedMeasurement
         {
@@ -83,58 +95,66 @@ namespace WatterMeasurement.ViewModel
             }
         }
 
-        private SlaveDevice selectedDevice;
+        private SlaveDevice _selectedDevice;
         public SlaveDevice SelectedDevice
         {
-            get { return selectedDevice; }
+            get { return _selectedDevice; }
             set
             {
-                if (selectedDevice != value)
+                if (_selectedDevice != value)
                 {
-                    selectedDevice = value;
-                    SelectedCounter = selectedDevice.counter[0];
+                    _selectedDevice = value;
+                    SelectedCounter = _selectedDevice.counter[0];
                     OnPropertyChanged("SelectedDevice");
                 }
             }
         }
 
-        private Counter selectedCounter;
+        private Counter _selectedCounter;
+        private CounterSystem _countersSystem;
+
         public Counter SelectedCounter
         {
-            get { return selectedCounter; }
+            get { return _selectedCounter; }
             set
             {
-                if (selectedCounter != value)
+                if (_selectedCounter != value)
                 {
-                    selectedCounter = value;
+                    _selectedCounter = value;
                     SelectedMeasurement = measurementsResults.systemMeasurementsResults[SelectedDevice.DeviceNumber - 1].deviceMeasurementsResults[SelectedCounter.CounterNumber - 1];
                     CurrentMeasurementResults = SelectedMeasurement.counterMeasurementsResults[currentMeasurementNumber - 1];
+                    //CurrentMeasurementResults.
+                    //SelectedMeasurement.counterMeasurementsResults
                     OnPropertyChanged("SelectedCounter");
                     OnPropertyChanged("SetValueLiters");
+                    OnPropertyChanged("SelectedMeasurement");
                 }
             }
         }
 
         public UInt32 SetValueLiters
         {
-            get { return SelectedCounter.SetCounterValue; }
+            get
+            {
+                if (SelectedCounter != null)
+                    return SelectedCounter.SetCounterValue;
+                return 0;
+            }
             set
             {
+                Debug.WriteLine("set_SetValueLiters");
                 SelectedCounter.SetCounterValue = value;
                 CurrentMeasurementResults.SetCounterValue = value;
-                OnPropertyChanged("SetValueLiters");
+                OnPropertyChanged(nameof(SetValueLiters));
+                Debug.WriteLine("set_SetValueLiters end");
+                //OnPropertyChanged("SelectedMeasurement");
                 //OnPropertyChanged("MeasurementSetCounterValue");
             }
         }
 
-        public MainViewModel()
+        public void FindSystem(byte converterAddress)
         {
-            // Find converter
-            converterAddress = 0x02;
-            measurementNumber = 3;
-            currentMeasurementNumber = 1;
             FindConverterDevice converter = new FindConverterDevice(converterAddress);
-
             if (converter.ConverterFounded)
             {
                 //Find all slave devices
@@ -167,6 +187,49 @@ namespace WatterMeasurement.ViewModel
                 Debug.WriteLine(countersSystem);
                 foundDevice = false;
             }
+        }
+
+        public MainViewModel()
+        {
+            // Find converter
+            converterAddress = 0x02;
+            measurementNumber = 3;
+            currentMeasurementNumber = 1;
+            FindSystem(converterAddress);
+            //FindConverterDevice converter = new FindConverterDevice(converterAddress);
+
+            //if (converter.ConverterFounded)
+            //{
+            //    //Find all slave devices
+            //    byte startAddress = 10;
+            //    byte endAddress = 30;
+            //    FindSlaveDevices slaveDevices = new FindSlaveDevices(converter.UsedSerialPort, startAddress, endAddress);
+            //    bool found = slaveDevices.DevicesFound;
+
+            //    //create CounterSystemModel
+            //    if (slaveDevices.DevicesFound)
+            //    {
+            //        countersSystem = new CounterSystem(converter.UsedSerialPort, slaveDevices.GetFoundDevices);
+            //        measurementsResults = new SystemMeasurementsResults(measurementNumber, countersSystem.numberOfSlaveDevices);
+            //        //measurementsResults.systemMeasurementsResults[0].
+            //        //OnPropertyChanged(nameof(measurementsResults));
+            //        SelectedDevice = countersSystem.device[0];
+            //        SelectedCounter = SelectedDevice.counter[0];
+
+            //        Debug.WriteLine("measurementsResults");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Can't find SLAVE DEVICES", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //    foundDevice = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("CONVERTER NOT FOUND", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    Debug.WriteLine(countersSystem);
+            //    foundDevice = false;
+            //}
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

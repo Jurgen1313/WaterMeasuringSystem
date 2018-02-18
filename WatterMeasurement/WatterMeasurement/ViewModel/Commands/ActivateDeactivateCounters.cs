@@ -14,11 +14,8 @@ namespace WatterMeasurement.ViewModel.Commands
     //public DelegateCommand sdfsdfsdf();
     public class ActivateDeactivateCounters : ICommand
     {
-        private ViewModelCommands selectedDevice;
-
-        public ActivateDeactivateCounters(ViewModelCommands selectedDevice)
+        public ActivateDeactivateCounters()
         {
-            this.selectedDevice = selectedDevice;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -48,25 +45,5 @@ namespace WatterMeasurement.ViewModel.Commands
             else
                 MessageBox.Show("Invalid parameter in ActivateDeactivateCounters command");
         }
-        //private void ActivateDeactivateCountersInDevice(SlaveDevice device)
-        //{
-        //    SlaveDevice _device = device;
-        //    int index = 0;
-        //    int activeCounters = 0;            
-
-        //    foreach (var counter in _device.counter)
-        //    {
-        //        if (counter.Active)
-        //        {
-        //            activeCounters |= 1 << index;                    
-        //        }
-        //        ++index;
-        //    }
-
-        //    byte[] packageToSlave = new byte[20];
-        //    byte[] packageFromSlave = new byte[20];
-        //    packageToSlave = TransferData.MakePackage(_device.DeviceAddress, (byte)ModbusCommand.EnableCounters, (byte)activeCounters);
-        //    TransferData.SendPackage(_device.GetSerialPort, packageToSlave);
-        //}
     }
 }
